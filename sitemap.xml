@@ -5,7 +5,7 @@
     <!-- Main Landing Page -->
     <url>
         <loc>https://scale-sail.io/</loc>
-        <lastmod>2025-11-25</lastmod>
+        <lastmod>2025-12-06</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
         <image:image>
@@ -36,47 +36,69 @@
             <image:loc>https://scale-sail.io/mintly.webp</image:loc>
             <image:title>Mintly Landing Page Template</image:title>
         </image:image>
+        <image:image>
+            <image:loc>https://scale-sail.io/budgy.webp</image:loc>
+            <image:title>Budgy Landing Page Template</image:title>
+        </image:image>
+        <image:image>
+            <image:loc>https://scale-sail.io/coinquest.webp</image:loc>
+            <image:title>CoinQuest Landing Page Template</image:title>
+        </image:image>
     </url>
     
     <!-- Product Demo Pages -->
     <url>
         <loc>https://www.smart-care-home.scale-sail.io/</loc>
-        <lastmod>2025-11-25</lastmod>
+        <lastmod>2025-12-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://www.skill-swap.scale-sail.io/</loc>
-        <lastmod>2025-11-25</lastmod>
+        <lastmod>2025-12-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://www.innovate-tech.scale-sail.io/</loc>
-        <lastmod>2025-11-25</lastmod>
+        <lastmod>2025-12-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://www.eco-vest.scale-sail.io/</loc>
-        <lastmod>2025-11-25</lastmod>
+        <lastmod>2025-12-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://www.clean-fleet.scale-sail.io/</loc>
-        <lastmod>2025-11-25</lastmod>
+        <lastmod>2025-12-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     
     <url>
         <loc>https://www.mintly.scale-sail.io/</loc>
-        <lastmod>2025-11-25</lastmod>
+        <lastmod>2025-12-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.budgy.scale-sail.io/</loc>
+        <lastmod>2025-12-06</lastmod>
+        <changefreq>monthly</changefreq>
+        <priority>0.8</priority>
+    </url>
+    
+    <url>
+        <loc>https://www.coin-quest.scale-sail.io/</loc>
+        <lastmod>2025-12-06</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
