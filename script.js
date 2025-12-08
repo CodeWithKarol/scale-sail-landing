@@ -100,12 +100,87 @@ if (document.readyState === "loading") {
 const productDialog = document.getElementById(
 	"product-dialog"
 );
-const dialogOverlay = productDialog.querySelector(
-	".dialog-overlay"
+const panelBackdrop = productDialog.querySelector(
+	".panel-backdrop"
 );
-const dialogClose = productDialog.querySelector(
-	".dialog-close"
+const panelClose = productDialog.querySelector(
+	".panel-close"
 );
+const panelContent = productDialog.querySelector(
+	".panel-content"
+);
+const panelHandleWrapper =
+	productDialog.querySelector(
+		".panel-handle-wrapper"
+	);
+
+// Touch handling for mobile swipe to close
+let touchStartY = 0;
+let touchCurrentY = 0;
+let isDragging = false;
+
+if (panelHandleWrapper) {
+	panelHandleWrapper.addEventListener(
+		"touchstart",
+		(e) => {
+			touchStartY = e.touches[0].clientY;
+			isDragging = true;
+		},
+		{ passive: true }
+	);
+
+	document.addEventListener(
+		"touchmove",
+		(e) => {
+			if (
+				!isDragging ||
+				!productDialog.classList.contains(
+					"active"
+				)
+			)
+				return;
+
+			touchCurrentY = e.touches[0].clientY;
+			const deltaY = touchCurrentY - touchStartY;
+
+			// Only allow downward dragging
+			if (deltaY > 0) {
+				const panel = productDialog.querySelector(
+					".panel-container"
+				);
+				panel.style.transform = `translateY(${deltaY}px)`;
+				panel.style.transition = "none";
+			}
+		},
+		{ passive: true }
+	);
+
+	document.addEventListener("touchend", (e) => {
+		if (
+			!isDragging ||
+			!productDialog.classList.contains("active")
+		)
+			return;
+
+		const deltaY = touchCurrentY - touchStartY;
+		const panel = productDialog.querySelector(
+			".panel-container"
+		);
+
+		// Close if dragged down more than 150px
+		if (deltaY > 150) {
+			closeProductDialog();
+		} else {
+			// Snap back
+			panel.style.transform = "";
+			panel.style.transition = "";
+		}
+
+		isDragging = false;
+		touchStartY = 0;
+		touchCurrentY = 0;
+	});
+}
 
 // Product data
 const productsData = {
@@ -317,7 +392,7 @@ function openProductDialog(productKey) {
 	);
 	if (product.badge) {
 		badgeElement.textContent = product.badge;
-		badgeElement.className = `dialog-badge ${product.badge}`;
+		badgeElement.className = `panel-badge ${product.badge}`;
 		badgeElement.style.display = "block";
 	} else {
 		badgeElement.style.display = "none";
@@ -353,6 +428,17 @@ function openProductDialog(productKey) {
 function closeProductDialog() {
 	productDialog.classList.remove("active");
 	document.body.style.overflow = "";
+
+	// Reset panel transform for next open
+	setTimeout(() => {
+		const panel = productDialog.querySelector(
+			".panel-container"
+		);
+		if (panel) {
+			panel.style.transform = "";
+			panel.style.transition = "";
+		}
+	}, 300);
 }
 
 // Add click event to all product cards
@@ -378,14 +464,14 @@ document
 		});
 	});
 
-// Close dialog on overlay click
-dialogOverlay.addEventListener(
+// Close dialog on backdrop click
+panelBackdrop.addEventListener(
 	"click",
 	closeProductDialog
 );
 
 // Close dialog on close button click
-dialogClose.addEventListener(
+panelClose.addEventListener(
 	"click",
 	closeProductDialog
 );
