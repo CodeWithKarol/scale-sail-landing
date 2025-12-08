@@ -2499,19 +2499,25 @@
 			</div>
 		</footer>
 
-		<!-- Product Details Dialog -->
+		<!-- Product Details Panel (Mobile & Tablet Optimized) -->
 		<div
 			id="product-dialog"
-			class="product-dialog"
+			class="product-panel"
 			role="dialog"
 			aria-modal="true"
-			aria-labelledby="dialog-title"
+			aria-labelledby="panel-title"
 		>
-			<div class="dialog-overlay"></div>
-			<div class="dialog-content">
+			<div class="panel-backdrop"></div>
+			<div class="panel-container">
+				<!-- Drag Handle for Mobile -->
+				<div class="panel-handle-wrapper">
+					<div class="panel-handle"></div>
+				</div>
+
+				<!-- Close Button -->
 				<button
-					class="dialog-close"
-					aria-label="Close dialog"
+					class="panel-close"
+					aria-label="Close details"
 				>
 					<svg
 						width="24"
@@ -2537,30 +2543,38 @@
 						></line>
 					</svg>
 				</button>
-				<div class="dialog-body">
-					<div class="dialog-image-wrapper">
-						<img
-							id="dialog-image"
-							src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221%22%20height%3D%221%22%3E%3C%2Fsvg%3E"
-							alt="Product preview"
-							class="dialog-image"
-						/>
-						<span
-							id="dialog-badge"
-							class="dialog-badge"
-						></span>
+
+				<!-- Scrollable Content -->
+				<div class="panel-content">
+					<!-- Hero Image Section -->
+					<div class="panel-hero">
+						<div class="panel-image-wrapper">
+							<img
+								id="dialog-image"
+								src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%221%22%20height%3D%221%22%3E%3C%2Fsvg%3E"
+								alt="Product preview"
+								class="panel-image"
+							/>
+							<span
+								id="dialog-badge"
+								class="panel-badge"
+							></span>
+						</div>
 					</div>
-					<div class="dialog-info">
-						<div class="dialog-header">
-							<div class="dialog-meta">
+
+					<!-- Product Info Section -->
+					<div class="panel-body">
+						<!-- Header -->
+						<div class="panel-header">
+							<div class="panel-meta">
 								<span
 									id="dialog-category"
-									class="category"
+									class="panel-category"
 								></span>
-								<div class="rating">
+								<div class="panel-rating">
 									<svg
-										width="14"
-										height="14"
+										width="16"
+										height="16"
 										fill="#FFB800"
 										viewBox="0 0 24 24"
 									>
@@ -2572,50 +2586,102 @@
 								</div>
 							</div>
 							<h2
-								id="dialog-title"
-								class="dialog-title"
+								id="panel-title"
+								class="panel-title"
 							>
-								Product Details
+								<span id="dialog-title"></span>
 							</h2>
 							<p
 								id="dialog-description"
-								class="dialog-description"
+								class="panel-description"
 							></p>
 						</div>
-						<div class="dialog-features">
-							<h3>Key Features</h3>
-							<ul id="dialog-features-list">
+
+						<!-- Features Section -->
+						<div class="panel-features">
+							<h3 class="panel-section-title">
+								Key Features
+							</h3>
+							<ul
+								id="dialog-features-list"
+								class="panel-features-list"
+							>
 								<!-- Features will be dynamically added -->
 							</ul>
 						</div>
-						<div class="dialog-footer">
-							<div class="dialog-price-wrapper">
-								<span class="dialog-price-label"
-									>Price:</span
+
+						<!-- Price Section -->
+						<div class="panel-price-section">
+							<div class="panel-price-info">
+								<span class="panel-price-label"
+									>Price</span
 								>
 								<span
 									id="dialog-price"
-									class="dialog-price"
+									class="panel-price"
 								></span>
-							</div>
-							<div class="dialog-actions">
-								<a
-									id="dialog-preview-link"
-									href="#"
-									target="_blank"
-									class="btn-glass"
-									>Live Preview</a
-								>
-								<a
-									id="dialog-buy-link"
-									href="#"
-									target="_blank"
-									class="btn-primary"
-									>Buy Now</a
-								>
 							</div>
 						</div>
 					</div>
+				</div>
+
+				<!-- Sticky Footer Actions -->
+				<div class="panel-footer">
+					<a
+						id="dialog-preview-link"
+						href="#"
+						target="_blank"
+						class="panel-btn panel-btn-secondary"
+					>
+						<svg
+							width="18"
+							height="18"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<path
+								d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"
+							></path>
+							<circle
+								cx="12"
+								cy="12"
+								r="3"
+							></circle>
+						</svg>
+						Preview
+					</a>
+					<a
+						id="dialog-buy-link"
+						href="#"
+						target="_blank"
+						class="panel-btn panel-btn-primary"
+					>
+						Buy Now
+						<svg
+							width="18"
+							height="18"
+							viewBox="0 0 24 24"
+							fill="none"
+							stroke="currentColor"
+							stroke-width="2"
+							stroke-linecap="round"
+							stroke-linejoin="round"
+						>
+							<line
+								x1="5"
+								y1="12"
+								x2="19"
+								y2="12"
+							></line>
+							<polyline
+								points="12 5 19 12 12 19"
+							></polyline>
+						</svg>
+					</a>
 				</div>
 			</div>
 		</div>
