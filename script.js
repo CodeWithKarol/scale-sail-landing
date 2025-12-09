@@ -422,12 +422,14 @@ function openProductDialog(productKey) {
 	// Show dialog
 	productDialog.classList.add("active");
 	document.body.style.overflow = "hidden";
+	document.body.classList.add("dialog-open");
 }
 
 // Close dialog function
 function closeProductDialog() {
 	productDialog.classList.remove("active");
 	document.body.style.overflow = "";
+	document.body.classList.remove("dialog-open");
 
 	// Reset panel transform for next open
 	setTimeout(() => {
