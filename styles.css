@@ -1772,39 +1772,6 @@ body {
 	font-size: 1.1rem;
 }
 
-.notify-form {
-	display: flex;
-	gap: 12px;
-	margin-bottom: 16px;
-}
-
-.notify-input {
-	flex: 1;
-	padding: 12px 20px;
-	border: 2px solid rgba(10, 31, 68, 0.1);
-	border-radius: 12px;
-	font-size: 1rem;
-	transition: all 0.3s ease;
-	outline: none;
-}
-
-.notify-input:focus {
-	border-color: #007bff;
-	box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.1);
-}
-
-.notify-note {
-	display: flex;
-	align-items: center;
-	gap: 8px;
-	font-size: 0.875rem;
-	color: rgba(10, 31, 68, 0.7);
-}
-
-.notify-note svg {
-	color: #10b981;
-}
-
 .pricing-image-wrapper {
 	flex: 1;
 	position: relative;
@@ -1851,14 +1818,6 @@ body {
 	.pricing-content .section-title,
 	.pricing-content .section-subtitle {
 		text-align: center;
-	}
-
-	.notify-form {
-		flex-direction: column;
-	}
-
-	.notify-note {
-		justify-content: center;
 	}
 
 	.pricing-image {
