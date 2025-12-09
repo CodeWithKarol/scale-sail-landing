@@ -2838,6 +2838,10 @@ body.mobile-menu-open {
 	border-top: 1px solid #e2e8f0;
 }
 
+body.dialog-open .sticky-mobile-cta {
+	display: none !important;
+}
+
 @media (max-width: 768px) {
 	.sticky-mobile-cta {
 		display: block;
