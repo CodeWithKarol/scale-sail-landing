@@ -273,8 +273,8 @@
 						},
 						"aggregateRating": {
 							"@type": "AggregateRating",
-							"ratingValue": "4.8",
-							"reviewCount": "124"
+							"ratingValue": "4.9",
+							"reviewCount": "85"
 						},
 						"review": {
 							"@type": "Review",
@@ -285,9 +285,9 @@
 							},
 							"author": {
 								"@type": "Person",
-								"name": "John Doe"
+								"name": "Sarah Jenkins"
 							},
-							"reviewBody": "Great template, very easy to use!"
+							"reviewBody": "Perfect for our elderly care startup. Clean code and easy to customize."
 						}
 					},
 					{
@@ -345,8 +345,8 @@
 						},
 						"aggregateRating": {
 							"@type": "AggregateRating",
-							"ratingValue": "4.8",
-							"reviewCount": "124"
+							"ratingValue": "4.7",
+							"reviewCount": "62"
 						},
 						"review": {
 							"@type": "Review",
@@ -357,9 +357,9 @@
 							},
 							"author": {
 								"@type": "Person",
-								"name": "John Doe"
+								"name": "Mike Chen"
 							},
-							"reviewBody": "Great template, very easy to use!"
+							"reviewBody": "Saved me weeks of dev time. The community features are well thought out."
 						}
 					},
 					{
@@ -418,7 +418,7 @@
 						"aggregateRating": {
 							"@type": "AggregateRating",
 							"ratingValue": "4.8",
-							"reviewCount": "124"
+							"reviewCount": "45"
 						},
 						"review": {
 							"@type": "Review",
@@ -429,9 +429,9 @@
 							},
 							"author": {
 								"@type": "Person",
-								"name": "John Doe"
+								"name": "Elena Rodriguez"
 							},
-							"reviewBody": "Great template, very easy to use!"
+							"reviewBody": "The AI integration sections are exactly what I needed for my ed-tech platform."
 						}
 					},
 					{
@@ -489,8 +489,8 @@
 						},
 						"aggregateRating": {
 							"@type": "AggregateRating",
-							"ratingValue": "4.8",
-							"reviewCount": "124"
+							"ratingValue": "4.9",
+							"reviewCount": "38"
 						},
 						"review": {
 							"@type": "Review",
@@ -501,9 +501,9 @@
 							},
 							"author": {
 								"@type": "Person",
-								"name": "John Doe"
+								"name": "David Park"
 							},
-							"reviewBody": "Great template, very easy to use!"
+							"reviewBody": "Beautiful design that perfectly communicates trust and sustainability."
 						}
 					},
 					{
@@ -562,20 +562,20 @@
 						"aggregateRating": {
 							"@type": "AggregateRating",
 							"ratingValue": "4.8",
-							"reviewCount": "124"
+							"reviewCount": "29"
 						},
 						"review": {
 							"@type": "Review",
 							"reviewRating": {
 								"@type": "Rating",
-								"ratingValue": "5",
+								"ratingValue": "4",
 								"bestRating": "5"
 							},
 							"author": {
 								"@type": "Person",
-								"name": "John Doe"
+								"name": "Tom Wilson"
 							},
-							"reviewBody": "Great template, very easy to use!"
+							"reviewBody": "Great dark mode implementation. Very professional look."
 						}
 					},
 					{
@@ -633,8 +633,8 @@
 						},
 						"aggregateRating": {
 							"@type": "AggregateRating",
-							"ratingValue": "4.8",
-							"reviewCount": "124"
+							"ratingValue": "4.9",
+							"reviewCount": "156"
 						},
 						"review": {
 							"@type": "Review",
@@ -645,9 +645,9 @@
 							},
 							"author": {
 								"@type": "Person",
-								"name": "John Doe"
+								"name": "Jessica Lee"
 							},
-							"reviewBody": "Great template, very easy to use!"
+							"reviewBody": "Can't believe this is free! Better than many paid templates I've used."
 						}
 					},
 					{
@@ -706,7 +706,7 @@
 						"aggregateRating": {
 							"@type": "AggregateRating",
 							"ratingValue": "4.8",
-							"reviewCount": "124"
+							"reviewCount": "42"
 						},
 						"review": {
 							"@type": "Review",
@@ -717,9 +717,9 @@
 							},
 							"author": {
 								"@type": "Person",
-								"name": "John Doe"
+								"name": "Mark Johnson"
 							},
-							"reviewBody": "Great template, very easy to use!"
+							"reviewBody": "The financial dashboard components are top-notch."
 						}
 					},
 					{
@@ -777,8 +777,8 @@
 						},
 						"aggregateRating": {
 							"@type": "AggregateRating",
-							"ratingValue": "4.8",
-							"reviewCount": "124"
+							"ratingValue": "4.7",
+							"reviewCount": "33"
 						},
 						"review": {
 							"@type": "Review",
@@ -789,9 +789,9 @@
 							},
 							"author": {
 								"@type": "Person",
-								"name": "John Doe"
+								"name": "Alex Wong"
 							},
-							"reviewBody": "Great template, very easy to use!"
+							"reviewBody": "Love the gamification elements! Really engaging design."
 						}
 					}
 				]
@@ -872,6 +872,11 @@
 							>Pricing</a
 						>
 						<a
+							href="#blog"
+							class="nav-link"
+							>Blog</a
+						>
+						<a
 							href="#about"
 							class="nav-link"
 							>About</a
@@ -940,12 +945,14 @@
 								<a
 									href="#products"
 									class="btn btn-primary btn-lg"
+									onclick="gtag('event', 'click_explore', {'event_category': 'engagement', 'event_label': 'Hero Button'});"
 								>
 									Explore Tools & Templates
 								</a>
 								<a
 									href="#features"
 									class="btn btn-secondary btn-lg"
+									onclick="gtag('event', 'view_demo', {'event_category': 'engagement', 'event_label': 'Hero Button'});"
 								>
 									<svg
 										width="20"
@@ -2239,6 +2246,125 @@
 					</div>
 				</div>
 			</section>
+
+			<section
+				class="blog-section"
+				id="blog"
+			>
+				<div class="container">
+					<div class="section-header text-center">
+						<span class="badge-pill"
+							>Latest Updates</span
+						>
+						<h2 class="section-title">
+							From the Blog
+						</h2>
+						<p class="section-subtitle">
+							Tips, tricks, and resources for
+							shipping faster.
+						</p>
+					</div>
+					<div class="blog-grid">
+						<!-- Article 1 -->
+						<a
+							href="#"
+							class="blog-card"
+						>
+							<div
+								class="blog-image"
+								style="
+									background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80');
+									background-size: cover;
+								"
+							></div>
+							<div class="blog-content">
+								<span class="blog-tag"
+									>Startup Guide</span
+								>
+								<h3 class="blog-title">
+									How to Launch a SaaS MVP in 24
+									Hours
+								</h3>
+								<p class="blog-excerpt">
+									Stop over-engineering and start
+									shipping. Here is our
+									step-by-step guide to getting
+									your first users.
+								</p>
+								<div class="blog-meta">
+									<span>Dec 8, 2025</span>
+									<span>5 min read</span>
+								</div>
+							</div>
+						</a>
+
+						<!-- Article 2 -->
+						<a
+							href="#"
+							class="blog-card"
+						>
+							<div
+								class="blog-image"
+								style="
+									background-image: url('https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=500&q=80');
+									background-size: cover;
+								"
+							></div>
+							<div class="blog-content">
+								<span class="blog-tag"
+									>Angular</span
+								>
+								<h3 class="blog-title">
+									Top 10 Angular Libraries for
+									Startups
+								</h3>
+								<p class="blog-excerpt">
+									Don't reinvent the wheel. These
+									essential libraries will save
+									you hundreds of development
+									hours.
+								</p>
+								<div class="blog-meta">
+									<span>Dec 5, 2025</span>
+									<span>8 min read</span>
+								</div>
+							</div>
+						</a>
+
+						<!-- Article 3 -->
+						<a
+							href="#"
+							class="blog-card"
+						>
+							<div
+								class="blog-image"
+								style="
+									background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80');
+									background-size: cover;
+								"
+							></div>
+							<div class="blog-content">
+								<span class="blog-tag"
+									>Design</span
+								>
+								<h3 class="blog-title">
+									Why Dark Mode Increases
+									Conversion
+								</h3>
+								<p class="blog-excerpt">
+									The psychology behind dark
+									interfaces and when you should
+									use them for your fintech app.
+								</p>
+								<div class="blog-meta">
+									<span>Nov 28, 2025</span>
+									<span>4 min read</span>
+								</div>
+							</div>
+						</a>
+					</div>
+				</div>
+			</section>
 		</main>
 
 		<footer class="site-footer">
@@ -2674,5 +2800,15 @@
 				]
 			}
 		</script>
+		<!-- Sticky Mobile CTA -->
+		<div class="sticky-mobile-cta">
+			<div class="container">
+				<a
+					href="#products"
+					class="btn btn-primary btn-block"
+					>Get Started Now</a
+				>
+			</div>
+		</div>
 	</body>
 </html>
