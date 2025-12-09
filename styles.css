@@ -2033,31 +2033,6 @@ body.mobile-menu-open {
 }
 
 /* ===================================
-   SCROLL ANIMATIONS
-   =================================== */
-
-.reveal {
-	opacity: 0;
-	transform: translateY(30px);
-	transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
-}
-
-.reveal.active {
-	opacity: 1;
-	transform: translateY(0);
-}
-
-.stagger-delay-1 {
-	transition-delay: 0.1s;
-}
-.stagger-delay-2 {
-	transition-delay: 0.2s;
-}
-.stagger-delay-3 {
-	transition-delay: 0.3s;
-}
-
-/* ===================================
    PRODUCT PANEL (Mobile & Tablet Optimized)
    =================================== */
 
@@ -2260,9 +2235,17 @@ body.mobile-menu-open {
 
 .panel-meta {
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
+	justify-content: space-between;
 	gap: 12px;
 	margin-bottom: 12px;
+}
+
+.panel-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 6px;
+	flex: 1;
 }
 
 .panel-category {
@@ -2283,6 +2266,9 @@ body.mobile-menu-open {
 	color: #0a1f44;
 	font-weight: 600;
 	font-size: 0.9375rem;
+	white-space: nowrap;
+	margin-top: 6px;
+	flex-shrink: 0;
 }
 
 .panel-title {
@@ -2934,4 +2920,35 @@ body.dialog-open .sticky-mobile-cta {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+/* ===================================
+   SCROLL ANIMATIONS
+   =================================== */
+
+.reveal {
+	opacity: 0;
+	transform: translateY(30px);
+	transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal.active {
+	opacity: 1;
+	transform: translateY(0);
+}
+
+.reveal.stagger-delay-1 {
+	transition-delay: 0.1s;
+}
+.reveal.stagger-delay-2 {
+	transition-delay: 0.2s;
+}
+.reveal.stagger-delay-3 {
+	transition-delay: 0.3s;
+}
+.reveal.stagger-delay-4 {
+	transition-delay: 0.4s;
+}
+.reveal.stagger-delay-5 {
+	transition-delay: 0.5s;
 }

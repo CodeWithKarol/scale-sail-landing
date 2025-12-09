@@ -60,6 +60,8 @@ if (
 }
 
 // Intersection Observer for scroll-triggered animations
+let scrollObserver;
+
 const initScrollAnimations = () => {
 	const observerOptions = {
 		root: null,
@@ -67,12 +69,20 @@ const initScrollAnimations = () => {
 		threshold: 0.1,
 	};
 
-	const observer = new IntersectionObserver(
+	scrollObserver = new IntersectionObserver(
 		(entries, observer) => {
 			entries.forEach((entry) => {
 				if (entry.isIntersecting) {
 					entry.target.classList.add("active");
 					observer.unobserve(entry.target);
+
+					// Remove reveal class after animation to restore original transitions (e.g. hover effects)
+					setTimeout(() => {
+						entry.target.classList.remove(
+							"reveal",
+							"active"
+						);
+					}, 1500);
 				}
 			});
 		},
@@ -82,7 +92,7 @@ const initScrollAnimations = () => {
 	const revealElements =
 		document.querySelectorAll(".reveal");
 	revealElements.forEach((el) =>
-		observer.observe(el)
+		scrollObserver.observe(el)
 	);
 };
 
@@ -425,6 +435,155 @@ function openProductDialog(productKey) {
 	document.body.classList.add("dialog-open");
 }
 
+// Open Gumroad product dialog
+function openGumroadProductDialog(product) {
+	// Populate dialog content
+	document.getElementById("dialog-image").src =
+		product.preview_url || product.thumbnail_url;
+	document.getElementById("dialog-image").alt =
+		product.name;
+
+	const categoryContainer =
+		document.getElementById("dialog-category");
+	categoryContainer.innerHTML = "";
+
+	if (product.tags && product.tags.length > 0) {
+		product.tags.forEach((tag) => {
+			const tagSpan =
+				document.createElement("span");
+			tagSpan.textContent = tag;
+			tagSpan.className = "panel-category";
+			categoryContainer.appendChild(tagSpan);
+		});
+	} else {
+		const defaultSpan =
+			document.createElement("span");
+		defaultSpan.textContent = "Product";
+		defaultSpan.className = "panel-category";
+		categoryContainer.appendChild(defaultSpan);
+	}
+
+	// Gumroad API doesn't provide rating, defaulting to 5.0 or hiding
+	document.getElementById(
+		"dialog-rating"
+	).textContent = "5.0";
+
+	document.getElementById(
+		"dialog-title"
+	).textContent = product.name;
+
+	// Parse description to extract features and plain text
+	const tempDiv = document.createElement("div");
+	tempDiv.innerHTML = product.description;
+
+	// Extract Live Demo URL if available
+	const liveDemoLink = tempDiv.querySelector(
+		"a.tiptap__button"
+	);
+	let livePreviewUrl = product.preview_url;
+	if (liveDemoLink && liveDemoLink.href) {
+		livePreviewUrl = liveDemoLink.href;
+		liveDemoLink.remove();
+	}
+
+	// Extract features from the first ul found
+	const features = [];
+	const ul = tempDiv.querySelector("ul");
+	if (ul) {
+		ul.querySelectorAll("li").forEach((li) => {
+			features.push(li.textContent.trim());
+		});
+		ul.remove();
+	}
+
+	// Clean up headings and HRs to get a cleaner description
+	tempDiv
+		.querySelectorAll(
+			"h1, h2, h3, h4, h5, h6, hr"
+		)
+		.forEach((el) => el.remove());
+
+	// Get the remaining text, which should be primarily the intro description
+	const plainDescription =
+		tempDiv.textContent ||
+		tempDiv.innerText ||
+		"";
+	// Use a slightly longer limit for the dialog, or full text if it's reasonable
+	document.getElementById(
+		"dialog-description"
+	).textContent = plainDescription.trim();
+
+	document.getElementById(
+		"dialog-price"
+	).textContent = product.formatted_price;
+
+	const previewLink = document.getElementById(
+		"dialog-preview-link"
+	);
+	if (livePreviewUrl) {
+		previewLink.href = livePreviewUrl;
+		previewLink.style.display = "inline-flex";
+	} else {
+		previewLink.style.display = "none";
+	}
+
+	document.getElementById(
+		"dialog-buy-link"
+	).href = product.short_url;
+
+	// Set badge (logic can be improved based on product data)
+	const badgeElement = document.getElementById(
+		"dialog-badge"
+	);
+	// Example: Check if new or popular based on tags or name
+	if (
+		product.tags &&
+		product.tags.includes("new")
+	) {
+		badgeElement.textContent = "New";
+		badgeElement.className = "panel-badge new";
+		badgeElement.style.display = "block";
+	} else {
+		badgeElement.style.display = "none";
+	}
+
+	// Update buy button text for free products
+	const buyButton = document.getElementById(
+		"dialog-buy-link"
+	);
+	if (
+		product.price === 0 ||
+		product.formatted_price.includes("0+")
+	) {
+		buyButton.textContent = "Download";
+	} else {
+		buyButton.textContent = "Buy Now";
+	}
+
+	// Populate features
+	const featuresList = document.getElementById(
+		"dialog-features-list"
+	);
+	featuresList.innerHTML = "";
+	if (features.length > 0) {
+		features.forEach((feature) => {
+			const li = document.createElement("li");
+			li.textContent = feature;
+			featuresList.appendChild(li);
+		});
+	} else {
+		// Fallback if no features found in description
+		const li = document.createElement("li");
+		li.textContent = "High quality template";
+		featuresList.appendChild(li);
+	}
+
+	// Show dialog
+	productDialog.classList.add("active");
+	document.body.style.overflow = "hidden";
+	document.body.classList.add("dialog-open");
+}
+
 // Close dialog function
 function closeProductDialog() {
 	productDialog.classList.remove("active");
@@ -487,3 +646,289 @@ document.addEventListener("keydown", (e) => {
 		closeProductDialog();
 	}
 });
+
+// Fetch Blog Posts
+async function fetchBlogPosts() {
+	const blogGrid =
+		document.querySelector(".blog-grid");
+	if (!blogGrid) return;
+
+	try {
+		const response = await fetch(
+			"https://api.rss2json.com/v1/api.json?rss_url=https%3A%2F%2Fmedium.com%2Ffeed%2F%40karol-modelski"
+		);
+		const data = await response.json();
+
+		if (
+			data.status === "ok" &&
+			data.items.length > 0
+		) {
+			blogGrid.innerHTML = ""; // Clear existing content
+
+			// Take only the first 3 items
+			const posts = data.items.slice(0, 3);
+
+			posts.forEach((post) => {
+				// Format date
+				const date = new Date(post.pubDate);
+				const formattedDate =
+					date.toLocaleDateString("en-US", {
+						year: "numeric",
+						month: "short",
+						day: "numeric",
+					});
+
+				// Strip HTML from description and truncate
+				const tempDiv =
+					document.createElement("div");
+				tempDiv.innerHTML = post.description;
+				const textContent =
+					tempDiv.textContent ||
+					tempDiv.innerText ||
+					"";
+				const excerpt =
+					textContent.length > 100
+						? textContent.substring(0, 100) +
+						  "..."
+						: textContent;
+
+				// Get image (thumbnail or first image in content)
+				let imageUrl = post.thumbnail;
+				if (!imageUrl) {
+					const imgMatch = post.description.match(
+						/<img[^>]+src="([^">]+)"/
+					);
+					if (imgMatch) {
+						imageUrl = imgMatch[1];
+					}
+				}
+				// Fallback image if none found
+				if (!imageUrl) {
+					imageUrl =
+						"https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=500&q=80";
+				}
+
+				// Create blog card
+				const article =
+					document.createElement("a");
+				article.href = post.link;
+				article.className = "blog-card";
+				article.target = "_blank"; // Open in new tab since it's external
+				article.rel = "noopener noreferrer";
+
+				article.innerHTML = `
+                    <div class="blog-image" style="background-image: url('${imageUrl}'); background-size: cover;"></div>
+                    <div class="blog-content">
+                        <span class="blog-tag">${
+													post.categories.length >
+													0
+														? post.categories[0]
+														: "Blog"
+												}</span>
+                        <h3 class="blog-title">${
+													post.title
+												}</h3>
+                        <p class="blog-excerpt">${excerpt}</p>
+                        <div class="blog-meta">
+                            <span>${formattedDate}</span>
+                            <span>${
+															post.author
+														}</span>
+                        </div>
+                    </div>
+                `;
+
+				blogGrid.appendChild(article);
+			});
+		}
+	} catch (error) {
+		console.error(
+			"Error fetching blog posts:",
+			error
+		);
+	}
+}
+
+// Call the function
+fetchBlogPosts();
+
+async function fetchGumroadProducts() {
+	const accessToken =
+		"VIK5oqu0ZuxUBaFDYXKBhlnmtMol7eF0XJNVTQy8LSU";
+	const url = `https://api.gumroad.com/v2/products?access_token=${accessToken}`;
+
+	try {
+		const response = await fetch(url);
+		const data = await response.json();
+
+		if (data.success) {
+			console.log(
+				"Gumroad Products:",
+				data.products
+			);
+			renderProducts(data.products);
+		} else {
+			console.error(
+				"Failed to fetch Gumroad products:",
+				data.message
+			);
+		}
+	} catch (error) {
+		console.error(
+			"Error fetching Gumroad products:",
+			error
+		);
+	}
+}
+
+function renderProducts(products) {
+	const productsGrid = document.querySelector(
+		".products-grid"
+	);
+	if (!productsGrid) return;
+
+	// Clear existing static content
+	productsGrid.innerHTML = "";
+
+	products.forEach((product, index) => {
+		if (!product.published) return;
+
+		const delay = (index % 3) + 1; // Stagger delay 1, 2, 3
+		const category =
+			product.tags && product.tags.length > 0
+				? product.tags[0]
+				: "Product";
+
+		// Create a temporary element to strip HTML from description
+		const tempDiv = document.createElement("div");
+		tempDiv.innerHTML = product.description;
+
+		// Extract Live Demo URL from description if available
+		const liveDemoLink = tempDiv.querySelector(
+			"a.tiptap__button"
+		);
+		let livePreviewUrl = product.preview_url;
+		if (liveDemoLink && liveDemoLink.href) {
+			livePreviewUrl = liveDemoLink.href;
+			// Remove the button text from the description preview
+			liveDemoLink.remove();
+		}
+
+		const plainDescription =
+			tempDiv.textContent ||
+			tempDiv.innerText ||
+			"";
+		const shortDescription =
+			plainDescription.length > 100
+				? plainDescription.substring(0, 100) +
+				  "..."
+				: plainDescription;
+
+		const article =
+			document.createElement("article");
+		article.className = `product-card reveal stagger-delay-${delay}`;
+
+		article.innerHTML = `
+            <div class="card-image-wrapper">
+                <img
+                    src="${product.thumbnail_url}"
+                    alt="${product.name}"
+                    loading="lazy"
+                    class="card-image"
+                />
+                <div class="card-overlay">
+                    ${
+											livePreviewUrl
+												? `<a href="${livePreviewUrl}" target="_blank" class="btn-glass">Live Preview</a>`
+												: ""
+										}
+                </div>
+            </div>
+            <div class="card-content">
+                <div class="card-meta">
+                    <span class="category">${category}</span>
+                </div>
+                <h3 class="card-title">
+                    ${product.name}
+                </h3>
+                <p class="card-description">
+                    ${shortDescription}
+                </p>
+                <div class="card-footer">
+                    <div class="price-wrapper">
+                        <span class="price">${
+													product.formatted_price
+												}</span>
+                    </div>
+                    <div class="card-actions">
+                        <a
+                            href="${
+															product.short_url
+														}"
+                            target="_blank"
+                            class="btn-sm btn-primary"
+                        >Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+		// Add click event to open dialog
+		article.addEventListener("click", (e) => {
+			// Prevent opening dialog if clicking on links
+			if (
+				e.target.tagName === "A" ||
+				e.target.closest("a")
+			)
+				return;
+			fetchAndOpenProductDialog(product.id);
+		});
+
+		productsGrid.appendChild(article);
+
+		if (
+			typeof scrollObserver !== "undefined" &&
+			scrollObserver
+		) {
+			scrollObserver.observe(article);
+		} else {
+			article.classList.add("active");
+		}
+	});
+}
+
+async function fetchAndOpenProductDialog(
+	productId
+) {
+	const accessToken =
+		"VIK5oqu0ZuxUBaFDYXKBhlnmtMol7eF0XJNVTQy8LSU";
+	const url = `https://api.gumroad.com/v2/products/${productId}?access_token=${accessToken}`;
+
+	try {
+		// Show loading state if needed (optional)
+		document.body.style.cursor = "wait";
+
+		const response = await fetch(url);
+		const data = await response.json();
+
+		document.body.style.cursor = "default";
+
+		if (data.success) {
+			openGumroadProductDialog(data.product);
+		} else {
+			console.error(
+				"Failed to fetch product details:",
+				data.message
+			);
+		}
+	} catch (error) {
+		document.body.style.cursor = "default";
+		console.error(
+			"Error fetching product details:",
+			error
+		);
+	}
+}
+
+// Call the function to fetch Gumroad products
+fetchGumroadProducts();
