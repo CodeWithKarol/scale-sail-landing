@@ -3185,59 +3185,200 @@ body.mobile-menu-open {
 	font-weight: 600;
 }
 
+/* Mobile Filter Styles */
+.mobile-filter-bar {
+    display: none;
+    margin: 1rem 0;
+}
+
+.mobile-filter-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem;
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-weight: 600;
+    color: #0f172a;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.mobile-filter-toggle:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+}
+
+.mobile-filters-header {
+    display: none;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 1rem;
+    margin-bottom: 1rem;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.mobile-filters-header h3 {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #0f172a;
+    margin: 0;
+}
+
+.close-filters-btn {
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.close-filters-btn:hover {
+    background: #f1f5f9;
+    color: #0f172a;
+}
+
+.filters-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1190;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(4px);
+}
+
+.filters-backdrop.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.filter-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    width: auto;
+}
+
+.apply-filters-btn {
+    display: none;
+    flex: 1;
+    padding: 0.75rem;
+    background: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.apply-filters-btn:hover {
+    background: #1d4ed8;
+}
+
 @media (max-width: 768px) {
-	.products-filters {
-		flex-direction: column;
-		align-items: stretch;
-		gap: 0.75rem;
-		position: sticky;
-		top: 72px;
-		z-index: 100;
-		padding: 0.75rem;
-	}
-	
-	.search-wrapper,
-	.filter-wrapper {
-		flex: 1 1 100%;
-	}
-	
-	.search-input {
-		font-size: 16px;
-		padding: 10px 12px 10px 40px;
-		height: 44px;
-	}
-	
-	.search-icon {
-		left: 12px;
-		width: 20px;
-		height: 20px;
-	}
-	
-	.filter-wrapper {
-		display: grid;
-		grid-template-columns: auto 1fr;
-		gap: 0.5rem;
-		align-items: center;
-	}
-	
-	.filter-select {
-		width: 100%;
-		font-size: 16px;
-		padding: 10px 2rem 10px 12px;
-		height: 44px;
-		min-width: unset;
-	}
-	
-	.clear-filters-btn {
-		width: 100%;
-		padding: 14px 1.25rem;
-		height: 52px;
-		font-size: 16px;
-	}
-	
-	.products-per-page {
-		display: none;
-	}
+    .mobile-filter-bar {
+        display: block;
+    }
+
+    .products-filters {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #fff;
+        z-index: 1200;
+        padding: 1.5rem;
+        border-radius: 20px 20px 0 0;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.15);
+        transform: translateY(100%);
+        transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.3s;
+        visibility: hidden;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.25rem;
+        max-height: 85vh;
+        overflow-y: auto;
+        margin: 0;
+    }
+
+    .products-filters.active {
+        transform: translateY(0);
+        visibility: visible;
+    }
+
+    .mobile-filters-header {
+        display: flex;
+    }
+
+    .apply-filters-btn {
+        display: block;
+    }
+    
+    .filter-actions {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e2e8f0;
+        width: 100%;
+    }
+
+    .search-wrapper,
+    .filter-wrapper {
+        flex: 1 1 100%;
+    }
+    
+    .search-input {
+        font-size: 16px;
+        padding: 12px 12px 12px 44px;
+        height: 48px;
+    }
+    
+    .search-icon {
+        left: 14px;
+        width: 20px;
+        height: 20px;
+    }
+    
+    .filter-wrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .filter-select {
+        width: 100%;
+        font-size: 16px;
+        padding: 12px 1rem;
+        height: 48px;
+        min-width: unset;
+    }
+    
+    .clear-filters-btn {
+        width: 100%;
+        padding: 12px 1.25rem;
+        height: 48px;
+        font-size: 16px;
+        flex: 1;
+    }
+    
+    .products-per-page {
+        display: none;
+    }
 }
 
 /* Products Controls */
