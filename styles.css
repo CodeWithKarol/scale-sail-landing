@@ -3584,20 +3584,16 @@ body.mobile-menu-open {
 
 /* Mobile Portrait (below 600px) */
 @media (max-width: 599px) {
-	.products-pagination .pagination-btn:not(.prev):not(.next):not(.active) {
-		display: none;
+	.products-pagination {
+		flex-wrap: wrap;
+		gap: 0.5rem;
 	}
-	
-	.products-pagination .pagination-btn:not(.prev):not(.next):not(.active):first-of-type,
-	.products-pagination .pagination-btn:not(.prev):not(.next):not(.active):last-of-type {
-		display: none;
-	}
-	
+
 	.products-pagination .pagination-btn {
-		min-width: 48px;
-		min-height: 48px;
-		padding: 12px 16px;
-		font-size: 1rem;
+		min-width: 44px;
+		min-height: 44px;
+		padding: 0 12px;
+		font-size: 0.9rem;
 	}
 	
 	.products-pagination .pagination-btn.prev,
