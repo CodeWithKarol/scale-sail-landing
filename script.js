@@ -737,7 +737,6 @@ async function fetchGumroadProducts() {
     const data = await response.json();
 
     if (data.success) {
-      console.log("Gumroad Products:", data.products);
       allProducts = data.products.filter((product) => product.published);
       filteredProducts = [...allProducts];
       populateCategoryFilter();
@@ -849,17 +848,6 @@ function displayProducts(page) {
       e.preventDefault();
       fetchAndOpenProductDialog(product.id);
     });
-
-    // Remove hover effects on touch for better mobile UX
-    article.addEventListener(
-      "touchstart",
-      (e) => {
-        if (e.target.tagName === "A" || e.target.closest("a")) return;
-        e.preventDefault();
-        fetchAndOpenProductDialog(product.id);
-      },
-      { passive: false }
-    );
 
     productsGrid.appendChild(article);
   });
@@ -983,13 +971,6 @@ function populateCategoryFilter() {
 }
 
 function applyFilters() {
-  console.log("Applying filters:", {
-    searchTerm: currentSearchTerm,
-    category: currentCategory,
-    sort: currentSort,
-    totalProducts: allProducts.length,
-  });
-
   // Start with all products
   filteredProducts = [...allProducts];
 
@@ -1031,8 +1012,6 @@ function applyFilters() {
     });
   }
 
-  console.log("Filtered products count:", filteredProducts.length);
-
   // Update clear filters button state
   updateClearFiltersButton();
 
@@ -1046,50 +1025,40 @@ function applyFilters() {
 }
 
 function initProductFilters() {
-  console.log("Initializing product filters...");
-
   // Search input
   const searchInput = document.getElementById("product-search");
-  console.log("Search input found:", !!searchInput);
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       currentSearchTerm = e.target.value;
-      console.log("Search term:", currentSearchTerm);
       applyFilters();
     });
   }
 
   // Category filter
   const categoryFilter = document.getElementById("category-filter");
-  console.log("Category filter found:", !!categoryFilter);
   if (categoryFilter) {
     categoryFilter.addEventListener("change", (e) => {
       currentCategory = e.target.value;
-      console.log("Category selected:", currentCategory);
       applyFilters();
     });
   }
 
   // Sort filter
   const sortFilter = document.getElementById("sort-filter");
-  console.log("Sort filter found:", !!sortFilter);
   if (sortFilter) {
     sortFilter.addEventListener("change", (e) => {
       currentSort = e.target.value;
-      console.log("Sort selected:", currentSort);
       applyFilters();
     });
   }
 
   // Clear filters button
   const clearBtn = document.getElementById("clear-filters");
-  console.log("Clear button found:", !!clearBtn);
   if (clearBtn) {
     // Initialize button state
     updateClearFiltersButton();
 
     clearBtn.addEventListener("click", () => {
-      console.log("Clearing filters...");
       // Reset all filter values
       currentSearchTerm = "";
       currentCategory = "all";
