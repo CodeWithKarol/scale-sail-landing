@@ -36,6 +36,41 @@ document.addEventListener("click", (e) => {
   }
 });
 
+// Mobile Filter Toggle
+const mobileFilterToggle = document.getElementById("mobile-filter-toggle");
+const productsFilters = document.getElementById("products-filters");
+const filtersBackdrop = document.getElementById("filters-backdrop");
+const closeFiltersBtn = document.getElementById("close-filters");
+const applyFiltersBtn = document.getElementById("apply-filters");
+
+function openFilters() {
+  if (productsFilters) productsFilters.classList.add("active");
+  if (filtersBackdrop) filtersBackdrop.classList.add("active");
+  document.body.style.overflow = "hidden"; // Prevent background scrolling
+}
+
+function closeFilters() {
+  if (productsFilters) productsFilters.classList.remove("active");
+  if (filtersBackdrop) filtersBackdrop.classList.remove("active");
+  document.body.style.overflow = "";
+}
+
+if (mobileFilterToggle) {
+  mobileFilterToggle.addEventListener("click", openFilters);
+}
+
+if (closeFiltersBtn) {
+  closeFiltersBtn.addEventListener("click", closeFilters);
+}
+
+if (filtersBackdrop) {
+  filtersBackdrop.addEventListener("click", closeFilters);
+}
+
+if (applyFiltersBtn) {
+  applyFiltersBtn.addEventListener("click", closeFilters);
+}
+
 // Header Scroll Effect
 const header = document.querySelector(".site-header");
 
