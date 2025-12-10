@@ -38,6 +38,31 @@ document.addEventListener("click", (e) => {
 
 // Header Scroll Effect
 const header = document.querySelector(".site-header");
+
+function initStickyCtaVisibility() {
+  const stickyMobileCta = document.querySelector(".sticky-mobile-cta");
+  const productsSection = document.getElementById("products");
+
+  if (!stickyMobileCta || !productsSection) return;
+
+  function checkProductsVisibility() {
+    const productsRect = productsSection.getBoundingClientRect();
+    const viewportHeight = window.innerHeight;
+    
+    // Check if any part of products section is visible in viewport
+    const isInProductsSection = productsRect.top < viewportHeight && productsRect.bottom > 0;
+    
+    if (isInProductsSection) {
+      stickyMobileCta.classList.add("hidden");
+    } else {
+      stickyMobileCta.classList.remove("hidden");
+    }
+  }
+
+  window.addEventListener("scroll", checkProductsVisibility);
+  checkProductsVisibility(); // Check on load
+}
+
 window.addEventListener("scroll", () => {
   if (window.scrollY > 50) {
     header.classList.add("scrolled");
@@ -45,6 +70,9 @@ window.addEventListener("scroll", () => {
     header.classList.remove("scrolled");
   }
 });
+
+// Initialize after DOM is loaded
+document.addEventListener("DOMContentLoaded", initStickyCtaVisibility);
 
 // Smooth scroll behavior for anchor links
 if ("scrollBehavior" in document.documentElement.style) {
