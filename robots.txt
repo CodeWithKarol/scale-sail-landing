@@ -5,9 +5,6 @@ Allow: /
 # Sitemap location
 Sitemap: https://scale-sail.io/sitemap.xml
 
-# Crawl-delay for polite crawling
-Crawl-delay: 1
-
 # Allow all major search engine bots
 User-agent: Googlebot
 Allow: /
