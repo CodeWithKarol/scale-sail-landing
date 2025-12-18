@@ -25,6 +25,46 @@ body {
 	padding: 0 20px;
 }
 
+/* Back to Top Button */
+#back-to-top {
+	position: fixed;
+	bottom: 30px;
+	right: 30px;
+	width: 50px;
+	height: 50px;
+	background-color: #007bff;
+	color: white;
+	border: none;
+	border-radius: 50%;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+	z-index: 9999;
+	box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+#back-to-top.visible {
+	opacity: 1;
+	visibility: visible;
+}
+
+#back-to-top:hover {
+	background-color: #0056b3;
+	transform: translateY(-3px);
+	box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Testimonial Avatar Image */
+.author-avatar-img {
+	border-radius: 50%;
+	object-fit: cover;
+	border: 2px solid #f4f6f8;
+}
+
 /* Page Header */
 .site-header {
 	position: fixed;
@@ -113,6 +153,10 @@ body {
 	font-weight: 600;
 }
 
+.mobile-only-cta {
+	display: none;
+}
+
 /* Header Actions */
 .header-actions {
 	display: flex;
@@ -188,7 +232,7 @@ body.mobile-menu-open {
 }
 
 /* Responsive Header */
-@media (max-width: 992px) {
+@media (max-width: 1100px) {
 	/* Backdrop overlay - only shows when menu is active */
 	body.mobile-menu-open::after {
 		content: "";
@@ -256,6 +300,24 @@ body.mobile-menu-open {
 	.nav-link.active {
 		background: rgba(37, 99, 235, 0.1);
 		color: #2563eb;
+	}
+
+	.nav-link.mobile-only-cta {
+		display: flex;
+		background-color: #007bff;
+		color: white !important;
+		margin-top: 16px;
+		justify-content: center;
+		border-radius: 8px;
+		margin-left: 24px;
+		margin-right: 24px;
+		width: calc(100% - 48px);
+		text-align: center;
+	}
+
+	.nav-link.mobile-only-cta:hover {
+		background-color: #0056b3;
+		transform: translateY(-1px);
 	}
 
 	.mobile-menu-toggle {
@@ -609,9 +671,9 @@ body.mobile-menu-open {
 }
 
 /* Responsive Hero */
-@media (max-width: 992px) {
+@media (max-width: 1100px) {
 	.hero {
-		padding: 120px 0 60px;
+		padding: 160px 0 80px;
 	}
 
 	.hero-grid {
@@ -622,7 +684,7 @@ body.mobile-menu-open {
 
 	.hero-content {
 		margin: 0 auto;
-		padding: 0 16px;
+		padding: 0;
 	}
 
 	.hero-lead {
@@ -660,7 +722,7 @@ body.mobile-menu-open {
 
 @media (max-width: 640px) {
 	.hero {
-		padding: 80px 0 32px;
+		padding: 160px 0 60px;
 		min-height: auto;
 	}
 
