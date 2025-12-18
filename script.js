@@ -1269,6 +1269,22 @@ function initProductFilters() {
 	const searchInput = document.getElementById(
 		"product-search"
 	);
+
+	// Check for URL search parameter
+	const urlParams = new URLSearchParams(
+		window.location.search
+	);
+	const searchParam = urlParams.get("s");
+
+	if (searchParam) {
+		currentSearchTerm = searchParam;
+		if (searchInput) {
+			searchInput.value = searchParam;
+		}
+		// Apply filters immediately if search term is present
+		applyFilters();
+	}
+
 	if (searchInput) {
 		searchInput.addEventListener("input", (e) => {
 			currentSearchTerm = e.target.value;
