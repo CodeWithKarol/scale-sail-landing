@@ -52,6 +52,11 @@ body {
 	visibility: visible;
 }
 
+body.dialog-open #back-to-top {
+	opacity: 0 !important;
+	visibility: hidden !important;
+}
+
 #back-to-top:hover {
 	background-color: #0056b3;
 	transform: translateY(-3px);
@@ -2440,7 +2445,7 @@ body.mobile-menu-open {
 }
 
 .panel-title {
-	font-size: 2rem;
+	font-size: 1.25rem;
 	font-weight: 700;
 	color: #0a1f44;
 	line-height: 1.2;
@@ -2449,7 +2454,7 @@ body.mobile-menu-open {
 }
 
 .panel-description {
-	font-size: 1rem;
+	font-size: 0.95rem;
 	color: rgba(10, 31, 68, 0.7);
 	line-height: 1.7;
 	margin: 0;
@@ -2466,8 +2471,20 @@ body.mobile-menu-open {
 	line-height: 1.3;
 }
 
-.panel-description h3 {
+.panel-description h1 {
 	font-size: 1.25rem;
+}
+
+.panel-description h2 {
+	font-size: 1.15rem;
+}
+
+.panel-description h3 {
+	font-size: 1rem;
+}
+
+.panel-description h4 {
+	font-size: 0.95rem;
 }
 
 .panel-description p {
@@ -2494,6 +2511,18 @@ body.mobile-menu-open {
 	font-weight: 600;
 }
 
+.panel-description figure {
+	margin: 1.5em 0;
+	max-width: 100%;
+}
+
+.panel-description img {
+	max-width: 100%;
+	height: auto;
+	border-radius: 8px;
+	display: block;
+}
+
 /* Features Section */
 .panel-features {
 	padding-top: 28px;
@@ -2502,7 +2531,7 @@ body.mobile-menu-open {
 }
 
 .panel-section-title {
-	font-size: 1.125rem;
+	font-size: 0.9rem;
 	font-weight: 700;
 	color: #0a1f44;
 	margin: 0 0 16px 0;
@@ -2522,7 +2551,7 @@ body.mobile-menu-open {
 	display: flex;
 	align-items: flex-start;
 	gap: 12px;
-	font-size: 0.9375rem;
+	font-size: 0.9rem;
 	color: rgba(10, 31, 68, 0.75);
 	line-height: 1.6;
 	padding: 12px;
@@ -2571,7 +2600,7 @@ body.mobile-menu-open {
 }
 
 .panel-price {
-	font-size: 2.5rem;
+	font-size: 1.75rem;
 	font-weight: 700;
 	color: #0a1f44;
 	letter-spacing: -0.02em;
